@@ -5,7 +5,7 @@ SWIFTC      := swiftc
 #		When compiled using musl-gcc to be used with musl tools like we are doing
 #		here, it segfaults during runtime when the `-buildmode` is `c-archive`.
 # Make sure that the path is correct, we `cd` into `libgolang` when we use this compiler.
-GOC         := ../musl-go
+GOC         := ../bin/musl-go
 
 # Make sure that $SWIFT_STATIC_SDK is set correctly in your env.
 # In most cases you swift static sdk path should look like:
@@ -22,6 +22,7 @@ SWIFTFLAGS  := \
 	-sdk "$(SDK_ROOT)" \
 	-resource-dir "$(SDK_ROOT)/usr/lib/swift_static" \
 	-O \
+	-whole-module-optimization \
 	-parse-as-library \
 	-static-executable \
 	-static-stdlib \
