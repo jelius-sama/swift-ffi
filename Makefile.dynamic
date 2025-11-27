@@ -5,6 +5,7 @@ GOC         := go
 GOFLAGS     := build -buildmode=c-archive
 
 SWIFTFLAGS  := \
+	-O \
 	-parse-as-library \
 	-I ./libgolang \
 	-L ./libgolang \
