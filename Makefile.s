@@ -1,6 +1,6 @@
 SWIFTC      := swiftc
 # Go toolchain compiled against musl
-GOC         := musl-go
+GOC         := /home/jelius-sama/Opensource/musl-go/bin/go
 
 # Make sure that $SWIFT_STATIC_SDK is set correctly in your env.
 SDK_ROOT := $(SWIFT_STATIC_SDK)
