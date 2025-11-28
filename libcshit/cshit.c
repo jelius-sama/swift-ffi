@@ -39,7 +39,7 @@ int HandleCServer() {
     uint64_t hist = 0;
 
     printf("╔═════════════════════════════════════════════════════════════════╗\n");
-    printf("║              C-Go FFI Demo: Async Tasks & Channels              ║\n");
+    printf("║           C-Go-Swift FFI Demo: Async Tasks & Channels           ║\n");
     printf("╚═════════════════════════════════════════════════════════════════╝\n");
 
     // Register HTTP routes
