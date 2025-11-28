@@ -63,7 +63,7 @@ $(GOLIB): $(GOSRC)
 	@echo Successfully built \`$(GOLIB)\`.
 
 $(CLIB): $(CSRC)
-	@cd libcshit && musl-gcc -c cshit.c
+	@cd libcshit && musl-gcc -O3 -c cshit.c
 	@cd libcshit && ar rcs libcshit.a cshit.o
 	@echo Successfully built \`libcshit.a\`.
 

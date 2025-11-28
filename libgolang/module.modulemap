@@ -1,6 +1,5 @@
-module golang {
+module Golang {
     header "libgolang.h"
     link "golang"
     export *
 }
-
