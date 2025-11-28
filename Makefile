@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 # NOTE:
 # You can read through this if you want to, but I'd recommend just writing
 # the Go code in the `libgolang` directory and the Swift code in the `Sources`
@@ -48,6 +50,11 @@ SWIFTFLAGS  := \
 	-Xlinker --gc-sections \
 	-Xlinker --icf=all
 
+# NOTE:
+# Suppressing this warning because it is emitted internally by swiftc/clang,
+# not by our code, and has no effect on the build.
+SUPPRESSED_WARN := "clang: warning: argument unused during compilation: '-pie' \[-Wunused-command-line-argument\]"
+
 BIN         := bin/swift-ffi
 GOLIB       := libgolang/libgolang.a
 GOSRC       := libgolang/golang.go
@@ -70,7 +77,8 @@ $(CLIB): $(CSRC)
 
 $(BIN): $(SWIFTSRC) $(GOLIB) $(CLIB)
 	@mkdir -p bin
-	@$(SWIFTC) $(SWIFTFLAGS) -o $(BIN) $(SWIFTSRC)
+	@$(SWIFTC) $(SWIFTFLAGS) -o $(BIN) $(SWIFTSRC) \
+		2> >(grep -v $(SUPPRESSED_WARN) >&2)
 	@echo Successfully built \`$(BIN)\`.
 
 clean:
