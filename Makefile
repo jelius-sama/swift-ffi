@@ -95,14 +95,12 @@ $(GOLIB) $(GOHEADER): $(GOSRC)
 
 $(CLIB): $(CSRC) $(GOHEADER)
 	@$(CC) $(CFLAGS) -o $(COBJ) $(CSRC) && ar rcs $(CLIB) $(COBJ)
-	@rm $(COBJ)
 	@echo Successfully built \`$(CLIB)\`.
 
 $(BIN): $(SWIFTSRC) $(GOLIB) $(CLIB) $(GOHEADER)
 	@mkdir -p bin
 	@$(SWIFTC) $(SWIFTFLAGS) -o $(BIN) $(SWIFTSRC) \
 		2> >(grep -v $(SUPPRESSED_WARN) >&2)
-	@rm $(GOLIB) && rm $(CLIB)
 	@echo Successfully built \`$(BIN)\`.
 
 clean:
