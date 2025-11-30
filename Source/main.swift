@@ -1,6 +1,6 @@
-import Golang
 import CShit
 import Foundation
+import Golang
 
 @_cdecl("main")
 func main(_: Int32, _: CStringPtr) -> Int32 {
@@ -10,10 +10,15 @@ func main(_: Int32, _: CStringPtr) -> Int32 {
     print("Golang Add(): \(add)")
 
     // NOTE: Doesn't leak any memory
-    let hello = "Hello".toCStr, world = "World".toCStr
+    let hello = "Hello".toCStr
+    let world = "World".toCStr
     let toPrint: CString = StringInterpolation(hello, world)
 
-    defer { free(hello); free(world); free(toPrint); }
+    defer {
+        free(hello)
+        free(world)
+        free(toPrint)
+    }
 
     print(String(cString: toPrint))
 
@@ -22,8 +27,14 @@ func main(_: Int32, _: CStringPtr) -> Int32 {
 
     /* INFO: Server stuff starts from here on */
 
-    var retMsg: CString,  route: CString, message: CString
-    defer { free(route); free(message); free(retMsg); }
+    var retMsg: CString
+    var route: CString
+    var message: CString
+    defer {
+        free(route)
+        free(message)
+        free(retMsg)
+    }
 
     route = "/swift".toCStr
     message = "Hello from Swift".toCStr
@@ -38,5 +49,5 @@ func main(_: Int32, _: CStringPtr) -> Int32 {
     print(String(cString: retMsg))
 
     let ret = HandleCServer()
-    return ret;
+    return ret
 }
